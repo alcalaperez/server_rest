@@ -15,7 +15,8 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 
 		@Override
 		public Rutina toObject(ResultSet rs) throws SQLException {
-			return new Rutina(rs.getString("nombrerutina"), rs.getString("descripcion"));
+			return new Rutina(rs.getString("nombrerutina"), rs.getString("descripcion"),  
+					rs.getString("somatotipo"),  rs.getString("objetivo"));
 		}
 	}
 
@@ -25,7 +26,9 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 	public Long save(Rutina dto) {
 		jdbcTemplate.execute("RUTINA_INSERT", 
 				dto.getNombre(),
-				dto.getDescripcion()
+				dto.getDescripcion(),
+				dto.getSomatotipo(),
+				dto.getObjetivo()
 			);
 		return null;
 	}
@@ -34,6 +37,8 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 	public int update(Rutina dto) {
 		return jdbcTemplate.execute("RUTINA_UPDATE", 
 				dto.getDescripcion(),
+				dto.getSomatotipo(),
+				dto.getObjetivo(),
 				dto.getNombre()
 		);
 	}
