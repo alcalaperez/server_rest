@@ -7,6 +7,9 @@ import business.exception.BusinessException;
 import business.impl.command.Command;
 import business.impl.command.CommandExecutor;
 import business.impl.rutina.CreateRutinaCommand;
+import business.impl.rutina.DeleteRutinaCommand;
+import business.impl.rutina.FindAll;
+import business.impl.rutina.FindById;
 import business.model.Rutina;
 import infrastructures.Factories;
 
@@ -23,13 +26,9 @@ public class RutinaServiceImpl implements RutinaService {
 
 	@Override
 	public void deleteRutinaByName(String name) throws BusinessException {
-		new CommandExecutor<Void>().execute( new Command<Void>() {
-			@Override
-			public Void execute() throws BusinessException {
-				Factories.persistence.getRutinaoDao().deleteByName(name);
-				return null;
-			}
-		}); 
+		new CommandExecutor<Long>().execute( 
+				new DeleteRutinaCommand( name )
+			);
 		
 	}
 
@@ -48,10 +47,15 @@ public class RutinaServiceImpl implements RutinaService {
 
 	@Override
 	public List<Rutina> findAll() throws BusinessException {
-		return new CommandExecutor<List<Rutina>>().execute( new Command<List<Rutina>>() {
-			@Override public List<Rutina> execute() throws BusinessException {				
-				return Factories.persistence.getRutinaoDao().findAll();
-			}
-		});
+		return new CommandExecutor<List<Rutina>>().execute( 
+				new FindAll()
+			);
+	}
+
+	@Override
+	public Rutina findById(String nombre) throws BusinessException {
+		return new CommandExecutor<Rutina>().execute( 
+				new FindById(nombre)
+			);
 	}
 }

@@ -2,6 +2,7 @@ package persistence.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import business.model.DiaEntreno;
 import persistence.DiaRutinaDao;
@@ -28,6 +29,21 @@ public class DiaRutinaDaoJdbcImpl implements DiaRutinaDao {
 				diaEntreno.getOrdenSemanal()
 			);
 		return jdbcTemplate.getGeneratedKey();
+	}
+
+	@Override
+	public List<DiaEntreno> findByRutinaId(String nombreRutina) {
+		return jdbcTemplate.queryForList(
+				"DIA_RUTINA_FIND_BY_RUTINA", 
+				new DiaRutinaDtoMapper(), 
+				nombreRutina
+			);
+	}
+
+	@Override
+	public void delete(String name) {
+		jdbcTemplate.execute("DIA_RUTINA_DELETE", name);
+		
 	}
 
 

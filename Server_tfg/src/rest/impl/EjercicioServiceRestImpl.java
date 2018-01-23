@@ -36,7 +36,7 @@ public class EjercicioServiceRestImpl implements EjercicioServiceRest {
 
 
 	@Override
-	public void updateEjercicio(String nombre, HttpServletRequest request) throws BusinessException {
+	public void deleteEjercicio(String nombre, HttpServletRequest request) throws BusinessException {
 		service.deleteEjercicioByName(nombre);
 		
 	}

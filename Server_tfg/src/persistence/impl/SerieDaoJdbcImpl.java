@@ -2,6 +2,7 @@ package persistence.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import business.model.Serie;
 import persistence.SerieDao;
@@ -28,4 +29,18 @@ public class SerieDaoJdbcImpl implements SerieDao {
 		return jdbcTemplate.getGeneratedKey();
 	}
 
+	@Override
+	public List<Serie> findByDiaId(int id) {
+		return jdbcTemplate.queryForList(
+				"SERIE_FIND_BY_DIA", 
+				new SerieDtoMapper(), 
+				id
+			);
+	}
+
+	@Override
+	public void delete(int diaid) {
+		jdbcTemplate.execute("SERIE_DELETE", diaid);		
+	}
+	
 }

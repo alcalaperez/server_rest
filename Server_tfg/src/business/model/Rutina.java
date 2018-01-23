@@ -1,6 +1,7 @@
 package business.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -24,7 +25,7 @@ public class Rutina implements Serializable{
 	public Rutina(String nombre, String descripcion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		
+		diasEntrenamiento = new ArrayList<>();
 	}
 	@XmlElement
 	public String getNombre() {

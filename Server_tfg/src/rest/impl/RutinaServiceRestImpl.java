@@ -32,4 +32,11 @@ public class RutinaServiceRestImpl implements RutinaServiceRest {
 		service.updateRutina(rutina);
 
 	}
+
+
+	@Override
+	public void deleteRutina(String name, HttpServletRequest request) throws BusinessException {
+		service.deleteRutinaByName(name);
+		
+	}
 }

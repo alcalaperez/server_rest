@@ -11,4 +11,6 @@ public interface RutinaService {
 	public void deleteRutinaByName(String name) throws BusinessException;
 	public void updateRutina(Rutina rutina) throws BusinessException;
 	public List<Rutina> findAll() throws BusinessException;
+	public Rutina findById(String nombre) throws BusinessException;
+
 }

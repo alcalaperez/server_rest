@@ -52,6 +52,15 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 				id
 			);
 	}
+	
+	@Override
+	public Rutina findById(String id) {
+		return jdbcTemplate.queryForObject(
+				"RUTINA_FIND_BY_ID", 
+				new RutinaDtoMapper(), 
+				id
+			);
+	}
 
 	@Override
 	public List<Rutina> findAll() {

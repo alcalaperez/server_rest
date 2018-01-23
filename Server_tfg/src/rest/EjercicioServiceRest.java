@@ -42,7 +42,7 @@ public interface EjercicioServiceRest {
 
 	@DELETE
 	@Path("/{id}")
-	public void updateEjercicio(@PathParam("id") String id, @Context HttpServletRequest request) throws BusinessException;
+	public void deleteEjercicio(@PathParam("id") String id, @Context HttpServletRequest request) throws BusinessException;
 
 
 }
