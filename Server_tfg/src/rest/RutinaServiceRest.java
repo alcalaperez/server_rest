@@ -28,6 +28,12 @@ public interface RutinaServiceRest {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Rutina> findAllRutinas(@Context HttpServletRequest request)
 			throws BusinessException;
+	
+	@GET
+	@Path("/findByCaracs/{somatotipo}/{objetivo}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<Rutina> findRutinaBySomatotipoObjetivo(@Context HttpServletRequest request, @PathParam("somatotipo") String somatotipo, @PathParam("objetivo") String objetivo)
+			throws BusinessException;
 
 
 	@PUT 

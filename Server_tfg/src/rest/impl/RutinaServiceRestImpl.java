@@ -39,4 +39,11 @@ public class RutinaServiceRestImpl implements RutinaServiceRest {
 		service.deleteRutinaByName(name);
 		
 	}
+
+
+	@Override
+	public List<Rutina> findRutinaBySomatotipoObjetivo(HttpServletRequest request, String somatotipo, String objetivo)
+			throws BusinessException {
+		return service.findBySomaObjet(somatotipo, objetivo);
+	}
 }

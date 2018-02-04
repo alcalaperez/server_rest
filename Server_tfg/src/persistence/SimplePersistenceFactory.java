@@ -5,6 +5,7 @@ import persistence.impl.EjercicioDaoJdbcImpl;
 import persistence.impl.RutinaDaoJdbcImpl;
 import persistence.impl.SerieDaoJdbcImpl;
 import persistence.impl.TransactionJdbcImpl;
+import persistence.impl.UserDaoJdbcImpl;
 
 public class SimplePersistenceFactory  implements PersistenceFactory  {
 	public Transaction newTransaction() {
@@ -32,6 +33,12 @@ public class SimplePersistenceFactory  implements PersistenceFactory  {
 	@Override
 	public SerieDao getSerieDao() {
 		return new SerieDaoJdbcImpl();
+
+	}
+
+	@Override
+	public UserDao getUserDao() {
+		return new UserDaoJdbcImpl();
 
 	}
 

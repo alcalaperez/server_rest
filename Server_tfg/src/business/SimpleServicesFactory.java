@@ -2,6 +2,7 @@ package business;
 
 import business.impl.EjercicioServiceImpl;
 import business.impl.RutinaServiceImpl;
+import business.impl.UserServiceImpl;
 
 public class SimpleServicesFactory implements ServiceFactory {
 
@@ -14,6 +15,11 @@ public class SimpleServicesFactory implements ServiceFactory {
 	@Override
 	public RutinaService getRutinaService() {
 		return new RutinaServiceImpl();
+	}
+	
+	@Override
+	public UserService getUserService() {
+		return new UserServiceImpl();
 	}
 
 }

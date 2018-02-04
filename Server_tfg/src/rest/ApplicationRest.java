@@ -8,6 +8,7 @@ import javax.ws.rs.core.Application;
 
 import rest.impl.EjercicioServiceRestImpl;
 import rest.impl.RutinaServiceRestImpl;
+import rest.impl.UserServiceRestImpl;
 
 /**
  * Clase para anadir los servicios rest al contenedor
@@ -20,6 +21,7 @@ public class ApplicationRest extends Application {
 		Set<Class<?>> res = new HashSet<>();
 		res.add(EjercicioServiceRestImpl.class);
 		res.add(RutinaServiceRestImpl.class);
+		res.add(UserServiceRestImpl.class);
 
 		return res;
 	}

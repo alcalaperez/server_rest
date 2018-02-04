@@ -7,5 +7,6 @@ public interface PersistenceFactory {
 	public RutinaDao getRutinaoDao();
 	public DiaRutinaDao getDiaRutinaoDao();
 	public SerieDao getSerieDao();
+	public UserDao getUserDao();
 
 }

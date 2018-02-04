@@ -9,6 +9,7 @@ import business.impl.command.CommandExecutor;
 import business.impl.rutina.CreateRutinaCommand;
 import business.impl.rutina.DeleteRutinaCommand;
 import business.impl.rutina.FindAll;
+import business.impl.rutina.FindByCaracs;
 import business.impl.rutina.FindById;
 import business.model.Rutina;
 import infrastructures.Factories;
@@ -56,6 +57,13 @@ public class RutinaServiceImpl implements RutinaService {
 	public Rutina findById(String nombre) throws BusinessException {
 		return new CommandExecutor<Rutina>().execute( 
 				new FindById(nombre)
+			);
+	}
+
+	@Override
+	public List<Rutina> findBySomaObjet(String somatotipo, String objetivo) throws BusinessException {
+		return new CommandExecutor<List<Rutina>>().execute( 
+				new FindByCaracs(somatotipo, objetivo)
 			);
 	}
 }
