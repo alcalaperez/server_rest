@@ -91,5 +91,14 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 			);
 	}
 
+	@Override
+	public List<Rutina> findBySoma(String somatotipo) {
+		return jdbcTemplate.queryForList(
+				"RUTINA_FIND_BY_SOMA", 
+				new RutinaDtoMapper(),
+				somatotipo
+			);
+	}
+
 
 }

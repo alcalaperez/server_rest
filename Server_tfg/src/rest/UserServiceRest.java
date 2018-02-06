@@ -40,5 +40,15 @@ public interface UserServiceRest {
 	public GymUser verifyIsInGym(@PathParam("numeroSocio") int numeroSocio,
 			@PathParam("key") String key, 
 			 @Context HttpServletRequest request) throws BusinessException;
+
+	@GET
+	@Path("/alreadyReg/{numeroSocio}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	Usuario verifyAlreadyRegistered(@PathParam("numeroSocio") int numeroSocio, HttpServletRequest request) throws BusinessException;
+	
+	@GET
+	@Path("/alreadyTak/{login}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	Usuario verifyAlreadyTaken(@PathParam("login") String login, HttpServletRequest request) throws BusinessException;
 	
 }

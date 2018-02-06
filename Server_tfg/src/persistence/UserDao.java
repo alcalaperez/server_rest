@@ -8,6 +8,8 @@ public interface UserDao  extends GenericDao<Usuario, Long> {
 
 	Usuario findLoggableUser(String login, String password);
 	GymUser verifyUser(int numberCards, String key);
+	Usuario verifyAlreadyRegistered(int numberCards);
+	Usuario verifyAlreadyTaken(String login);
 
 
 }

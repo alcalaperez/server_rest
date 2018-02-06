@@ -31,6 +31,18 @@ public class UserServiceRestImpl implements UserServiceRest {
 		return service.verifyIsInGym(numeroSocio, key);
 
 	}
+	
+	@Override
+	public Usuario verifyAlreadyRegistered(int numeroSocio, HttpServletRequest request) throws BusinessException {
+		return service.verifyAlreadyRegistered(numeroSocio);
+
+	}
+
+
+	@Override
+	public Usuario verifyAlreadyTaken(String login, HttpServletRequest request) throws BusinessException {
+		return service.verifyAlreadyTaken(login);
+	}
 
 	  
 }

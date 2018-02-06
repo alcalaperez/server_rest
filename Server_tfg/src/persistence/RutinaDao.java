@@ -11,6 +11,7 @@ public interface RutinaDao extends GenericDao<Rutina, Long> {
 	int deleteByName(String name);
 	Rutina findById(String name);
 	List<Rutina> findBySomaObjet(String somatotipo, String objetivo);
+	List<Rutina> findBySoma(String somatotipo);
 
 	
 	

@@ -11,6 +11,7 @@ import business.impl.rutina.DeleteRutinaCommand;
 import business.impl.rutina.FindAll;
 import business.impl.rutina.FindByCaracs;
 import business.impl.rutina.FindById;
+import business.impl.rutina.FindBySomatipo;
 import business.model.Rutina;
 import infrastructures.Factories;
 
@@ -64,6 +65,13 @@ public class RutinaServiceImpl implements RutinaService {
 	public List<Rutina> findBySomaObjet(String somatotipo, String objetivo) throws BusinessException {
 		return new CommandExecutor<List<Rutina>>().execute( 
 				new FindByCaracs(somatotipo, objetivo)
+			);
+	}
+
+	@Override
+	public List<Rutina> findBySoma(String somatotipo) throws BusinessException {
+		return new CommandExecutor<List<Rutina>>().execute( 
+				new FindBySomatipo(somatotipo)
 			);
 	}
 }

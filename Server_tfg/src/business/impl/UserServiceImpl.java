@@ -5,6 +5,8 @@ import business.exception.BusinessException;
 import business.impl.command.CommandExecutor;
 import business.impl.user.CreateUserCommand;
 import business.impl.user.FindLoggableUserCommand;
+import business.impl.user.VerifyAlreadyRegisteredCommand;
+import business.impl.user.VerifyAlreadyTakenCommand;
 import business.impl.user.VerifyUserGymCommand;
 import business.model.GymUser;
 import business.model.Usuario;
@@ -30,6 +32,18 @@ public class UserServiceImpl implements UserService {
 	public GymUser verifyIsInGym(int numberCard, String key) throws BusinessException {
 		return new CommandExecutor<GymUser>()
 				.execute(new VerifyUserGymCommand<GymUser>(numberCard, key));
+	}
+
+	@Override
+	public Usuario verifyAlreadyRegistered(int numeroSocio) throws BusinessException {
+		return new CommandExecutor<Usuario>()
+				.execute(new VerifyAlreadyRegisteredCommand<GymUser>(numeroSocio));
+	}
+
+	@Override
+	public Usuario verifyAlreadyTaken(String login) throws BusinessException {
+		return new CommandExecutor<Usuario>()
+				.execute(new VerifyAlreadyTakenCommand<GymUser>(login));
 	}
 
 

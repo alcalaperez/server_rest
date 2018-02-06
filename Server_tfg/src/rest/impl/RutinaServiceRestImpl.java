@@ -46,4 +46,11 @@ public class RutinaServiceRestImpl implements RutinaServiceRest {
 			throws BusinessException {
 		return service.findBySomaObjet(somatotipo, objetivo);
 	}
+
+
+	@Override
+	public List<Rutina> findRutinaBySomatotipo(HttpServletRequest request, String somatotipo) throws BusinessException {
+		return service.findBySoma(somatotipo);
+
+	}
 }

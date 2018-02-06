@@ -86,5 +86,19 @@ public class UserDaoJdbcImpl implements UserDao {
 				key
 			);
 	}
+
+	@Override
+	public Usuario verifyAlreadyRegistered(int numberCards) {
+		return jdbcTemplate.queryForObject("USER_ALREADY_REGISTERED", new UserDtoMapper(), 
+				numberCards
+			);
+	}
+	
+	@Override
+	public Usuario verifyAlreadyTaken(String login) {
+		return jdbcTemplate.queryForObject("USER_ALREADY_TAKEN", new UserDtoMapper(), 
+				login
+			);
+	}
 	
 }
