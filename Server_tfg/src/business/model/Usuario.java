@@ -78,7 +78,6 @@ public class Usuario implements Serializable{
 		this.peso = peso;
 	}
 	
-	@XmlElement
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

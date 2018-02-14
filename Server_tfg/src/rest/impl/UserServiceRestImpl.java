@@ -1,48 +1,95 @@
 package rest.impl;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
+import java.util.List;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import business.UserService;
 import business.exception.BusinessException;
 import business.model.GymUser;
 import business.model.Usuario;
 import infrastructures.Factories;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import rest.UserServiceRest;
 
 public class UserServiceRestImpl implements UserServiceRest {
-	UserService service = Factories.services.getUserService();
-	
-
+	private UserService service = Factories.services.getUserService();
+	byte[] decodedKey = Base64.getDecoder().decode("11162210");
+	SecretKey keySign = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES"); 
+ 
 	@Override
-	public Usuario findLoggableUser(String login, String password, HttpServletRequest request)
+	public Response findLoggableUser(String login, String password)
 			throws BusinessException {
-		return service.findLoggableUser(login, password);
+		Usuario u = service.findLoggableUser(login, password);
+		Response response;
+		
+		if(u != null) {
+			response = Response.ok().entity(u).
+                header("token", issueToken(login, password)).build();
+		} else {
+			response = Response.status(Status.UNAUTHORIZED).build();
+		}
+		return response;
 	}
 
 
 	@Override
-	public void createUser(Usuario user, HttpServletRequest request) throws BusinessException {
+	public void createUser(Usuario user) throws BusinessException {
 		service.createUser(user);
 		
 	}
 
 	@Override
-	public GymUser verifyIsInGym(int numeroSocio, String key, HttpServletRequest request) throws BusinessException {
+	public GymUser verifyIsInGym(int numeroSocio, String key) throws BusinessException {
 		return service.verifyIsInGym(numeroSocio, key);
 
 	}
 	
 	@Override
-	public Usuario verifyAlreadyRegistered(int numeroSocio, HttpServletRequest request) throws BusinessException {
+	public Usuario verifyAlreadyRegistered(int numeroSocio) throws BusinessException {
 		return service.verifyAlreadyRegistered(numeroSocio);
 
 	}
 
 
 	@Override
-	public Usuario verifyAlreadyTaken(String login, HttpServletRequest request) throws BusinessException {
+	public Usuario verifyAlreadyTaken(String login) throws BusinessException {
 		return service.verifyAlreadyTaken(login);
 	}
 
-	  
+	private String issueToken(String login, String password) {		
+        String jwtToken = Jwts.builder()
+                .setSubject(login)
+                .signWith(SignatureAlgorithm.HS256, keySign)
+                .compact();
+        return jwtToken;
+    }
+
+
+	@Override
+	public List<Usuario> findAllUsers() throws BusinessException {
+		return service.findAll();
+
+	}
+
+
+	@Override
+	public void updateRutina(String username, String rutina) throws BusinessException {
+		service.updateRutinaAsignada(username, rutina);
+
+	}
+
+
+	@Override
+	public void updateRutinaByBody(String somatotipo, String objetivo, String rutina) throws BusinessException {
+		service.updateAllRutinaAsignada(somatotipo, objetivo, rutina);
+		
+	}
+	
+    
 }

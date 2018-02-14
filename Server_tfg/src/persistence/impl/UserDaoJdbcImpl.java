@@ -1,7 +1,6 @@
 package persistence.impl;
 
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -67,8 +66,10 @@ public class UserDaoJdbcImpl implements UserDao {
 
 	@Override
 	public List<Usuario> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return jdbcTemplate.queryForList(
+				"USER_FIND_ALL", 
+				new UserDtoMapper()
+			);
 	}
 
 	@Override
@@ -99,6 +100,24 @@ public class UserDaoJdbcImpl implements UserDao {
 		return jdbcTemplate.queryForObject("USER_ALREADY_TAKEN", new UserDtoMapper(), 
 				login
 			);
+	}
+
+	@Override
+	public void updateUserRutina(String usuario, String rutina) {
+		jdbcTemplate.execute("USER_UPDATE_RUTINA", 
+				rutina,
+				usuario
+			);
+		
+	}
+
+	@Override
+	public void updateUserRutinaForAll(String somatotipo, String objetivo, String rutina) {
+		jdbcTemplate.execute("USER_UPDATE_RUTINA_ALL", 
+				rutina,
+				somatotipo,
+				objetivo
+			);		
 	}
 	
 }

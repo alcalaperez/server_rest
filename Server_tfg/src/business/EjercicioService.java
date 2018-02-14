@@ -11,4 +11,5 @@ public interface EjercicioService {
 	public void deleteEjercicioByName(String name) throws BusinessException;
 	public void updateEjercicio(Ejercicio ejercicio) throws BusinessException;
 	public List<Ejercicio> findAll() throws BusinessException;
+	public List<Ejercicio> findByMusculo(String musculo) throws BusinessException;
 }

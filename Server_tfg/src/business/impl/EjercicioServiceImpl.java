@@ -51,4 +51,13 @@ public class EjercicioServiceImpl implements EjercicioService {
 			}
 		});
 	}
+
+	@Override
+	public List<Ejercicio> findByMusculo(String musculo) throws BusinessException {
+		return new CommandExecutor<List<Ejercicio>>().execute( new Command<List<Ejercicio>>() {
+			@Override public List<Ejercicio> execute() throws BusinessException {				
+				return Factories.persistence.getEjercicioDao().findByMusculo(musculo);
+			}
+		});
+	}
 }

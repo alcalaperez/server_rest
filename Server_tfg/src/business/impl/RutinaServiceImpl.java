@@ -15,23 +15,17 @@ import business.impl.rutina.FindBySomatipo;
 import business.model.Rutina;
 import infrastructures.Factories;
 
-
 public class RutinaServiceImpl implements RutinaService {
-
 
 	@Override
 	public Long createRutina(Rutina rutina) throws BusinessException {
-		return new CommandExecutor<Long>().execute( 
-				new CreateRutinaCommand( rutina )
-			);
+		return new CommandExecutor<Long>().execute(new CreateRutinaCommand(rutina));
 	}
 
 	@Override
 	public void deleteRutinaByName(String name) throws BusinessException {
-		new CommandExecutor<Long>().execute( 
-				new DeleteRutinaCommand( name )
-			);
-		
+		new CommandExecutor<Long>().execute(new DeleteRutinaCommand(name));
+
 	}
 
 	@Override
@@ -42,36 +36,38 @@ public class RutinaServiceImpl implements RutinaService {
 				Factories.persistence.getRutinaoDao().update(rutina);
 				return null;
 			}
-		}); 
-		
-	}
+		});
 
+	}
 
 	@Override
 	public List<Rutina> findAll() throws BusinessException {
-		return new CommandExecutor<List<Rutina>>().execute( 
-				new FindAll()
-			);
+		return new CommandExecutor<List<Rutina>>().execute(new FindAll());
 	}
 
 	@Override
 	public Rutina findById(String nombre) throws BusinessException {
-		return new CommandExecutor<Rutina>().execute( 
-				new FindById(nombre)
-			);
+		return new CommandExecutor<Rutina>().execute(new FindById(nombre));
 	}
 
 	@Override
 	public List<Rutina> findBySomaObjet(String somatotipo, String objetivo) throws BusinessException {
-		return new CommandExecutor<List<Rutina>>().execute( 
-				new FindByCaracs(somatotipo, objetivo)
-			);
+		return new CommandExecutor<List<Rutina>>().execute(new FindByCaracs(somatotipo, objetivo));
 	}
 
 	@Override
 	public List<Rutina> findBySoma(String somatotipo) throws BusinessException {
-		return new CommandExecutor<List<Rutina>>().execute( 
-				new FindBySomatipo(somatotipo)
-			);
+		return new CommandExecutor<List<Rutina>>().execute(new FindBySomatipo(somatotipo));
+	}
+
+	@Override
+	public List<Rutina> findAllOnlyNames() throws BusinessException {
+		return new CommandExecutor<List<Rutina>>().execute(new Command<List<Rutina>>() {
+			@Override
+			public List<Rutina> execute() throws BusinessException {
+				return Factories.persistence.getRutinaoDao().findAll();
+			}
+		});
+
 	}
 }

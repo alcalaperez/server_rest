@@ -1,11 +1,7 @@
 package rest.impl;
 
 import infrastructures.Factories;
-
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import rest.EjercicioServiceRest;
 import business.EjercicioService;
 import business.exception.BusinessException;
@@ -16,28 +12,34 @@ public class EjercicioServiceRestImpl implements EjercicioServiceRest {
 
 	  
 	@Override
-	public List<Ejercicio> findAllEjercicios(HttpServletRequest request) throws BusinessException {
+	public List<Ejercicio> findAllEjercicios() throws BusinessException {
 		return service.findAll();
 	}
 
 
 	@Override
-	public void createEjercicio(Ejercicio ejercicio, HttpServletRequest request) throws BusinessException {
+	public void createEjercicio(Ejercicio ejercicio) throws BusinessException {
 		service.createEjercicio(ejercicio);
 		
 	}
 
 
 	@Override
-	public void updateEjercicio(Ejercicio ejercicio, HttpServletRequest request) throws BusinessException {
+	public void updateEjercicio(Ejercicio ejercicio) throws BusinessException {
 		service.updateEjercicio(ejercicio);
 
 	}
 
 
 	@Override
-	public void deleteEjercicio(String nombre, HttpServletRequest request) throws BusinessException {
+	public void deleteEjercicio(String nombre) throws BusinessException {
 		service.deleteEjercicioByName(nombre);
 		
+	}
+
+
+	@Override
+	public List<Ejercicio> findByMusculo(String musculo) throws BusinessException {
+		return service.findByMusculo(musculo);
 	}
 }

@@ -3,7 +3,7 @@
 xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>sdi3-61.Web</display-name>
+  <display-name>gymnastics</display-name>
 
  
   <context-param>
@@ -20,7 +20,10 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1"
       <param-name>javax.ws.rs.Application</param-name>
       <param-value>rest.ApplicationRest</param-value>
     </init-param>
- 
+ 	<init-param>
+         <param-name>resteasy.providers</param-name>
+         <param-value>rest.filter.JWTTokenNeededFilter</param-value>
+     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   

@@ -1,5 +1,7 @@
 package business;
 
+import java.util.List;
+
 import business.exception.BusinessException;
 import business.model.GymUser;
 import business.model.Usuario;
@@ -10,5 +12,8 @@ public interface UserService {
 	public GymUser verifyIsInGym(int numberCard, String key) throws BusinessException;
 	public Usuario verifyAlreadyRegistered(int numeroSocio) throws BusinessException;
 	public Usuario verifyAlreadyTaken(String login) throws BusinessException;
+	public List<Usuario> findAll() throws BusinessException;
+	public void updateRutinaAsignada(String username, String rutina) throws BusinessException;
+	public void updateAllRutinaAsignada(String somatotipo, String objetivo, String rutina) throws BusinessException;
 
 }

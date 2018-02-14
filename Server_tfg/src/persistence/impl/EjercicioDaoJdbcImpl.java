@@ -74,5 +74,14 @@ public class EjercicioDaoJdbcImpl implements EjercicioDao {
 		
 	}
 
+	@Override
+	public List<Ejercicio> findByMusculo(String musculo) {
+		return jdbcTemplate.queryForList(
+				"EJERCICIO_FIND_BY_MUSCULO", 
+				new EjercicioDtoMapper(),
+				musculo
+			);
+	}
+
 
 }
