@@ -119,5 +119,12 @@ public class UserDaoJdbcImpl implements UserDao {
 				objetivo
 			);		
 	}
+
+	@Override
+	public GymUser getKeyGymUser(int numeroSocio) {
+		return jdbcTemplate.queryForObject("USER_GYM_KEY", new UserGymDtoMapper(), 
+				numeroSocio
+			);
+	}
 	
 }

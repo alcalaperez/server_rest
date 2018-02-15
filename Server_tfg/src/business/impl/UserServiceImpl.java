@@ -8,6 +8,7 @@ import business.impl.command.CommandExecutor;
 import business.impl.user.CreateUserCommand;
 import business.impl.user.FindAll;
 import business.impl.user.FindLoggableUserCommand;
+import business.impl.user.GetKeyGymUserCommand;
 import business.impl.user.UpdateRutinaAsignadaCommand;
 import business.impl.user.UpdateRutinaAsignadaForAllCommand;
 import business.impl.user.VerifyAlreadyRegisteredCommand;
@@ -68,6 +69,13 @@ public class UserServiceImpl implements UserService {
 	public void updateAllRutinaAsignada(String somatotipo, String objetivo, String rutina) throws BusinessException {
 		new CommandExecutor<Void>().execute( 
 				new UpdateRutinaAsignadaForAllCommand(somatotipo, objetivo, rutina)
+			);		
+	}
+
+	@Override
+	public String getKeyGymUser(String numeroSocio) throws BusinessException {
+		return new CommandExecutor<String>().execute( 
+				new GetKeyGymUserCommand(numeroSocio)
 			);		
 	}
 	

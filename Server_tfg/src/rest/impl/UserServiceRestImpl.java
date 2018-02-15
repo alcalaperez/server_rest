@@ -90,6 +90,13 @@ public class UserServiceRestImpl implements UserServiceRest {
 		service.updateAllRutinaAsignada(somatotipo, objetivo, rutina);
 		
 	}
+
+
+	@Override
+	public String getKeyGymUser(String numeroSocio) throws BusinessException {
+		return service.getKeyGymUser(numeroSocio);
+		
+	}
 	
     
 }

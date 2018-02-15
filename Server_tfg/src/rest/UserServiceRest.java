@@ -66,4 +66,10 @@ public interface UserServiceRest {
 	@Path("/updateRutinaByBody/{somatotipo}/{objetivo}/{rutina}")
 	@JWTTokenNeeded
 	public void updateRutinaByBody(@PathParam("somatotipo") String somatotipo, @PathParam("objetivo") String objetivo, @PathParam("rutina") String rutina) throws BusinessException;
+	
+	@GET
+	@Path("/getKeyUser/{numeroSocio}")
+	@JWTTokenNeeded
+	public String getKeyGymUser(@PathParam("numeroSocio") String numeroSocio) throws BusinessException;
+
 }

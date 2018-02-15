@@ -15,5 +15,6 @@ public interface UserService {
 	public List<Usuario> findAll() throws BusinessException;
 	public void updateRutinaAsignada(String username, String rutina) throws BusinessException;
 	public void updateAllRutinaAsignada(String somatotipo, String objetivo, String rutina) throws BusinessException;
+	public String getKeyGymUser(String numeroSocio) throws BusinessException;
 
 }
