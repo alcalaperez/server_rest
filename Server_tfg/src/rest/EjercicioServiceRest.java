@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import business.exception.BusinessException;
 import business.model.Ejercicio;
+import business.model.StringJax;
 /**
  * Rest para servicios de categorias
  * 
@@ -34,6 +35,19 @@ public interface EjercicioServiceRest {
 	@JWTTokenNeeded
 	public List<Ejercicio> findByMusculo(@PathParam("musculo") String musculo)
 			throws BusinessException;
+	
+	@GET
+	@Path("/findByName/{nombre}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@JWTTokenNeeded
+	public Ejercicio findByName(@PathParam("nombre") String nombre)
+			throws BusinessException;
+	
+	@GET
+	@Path("/findMusculos")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@JWTTokenNeeded
+	public List<StringJax> findMusculos() throws BusinessException;
 
 	@PUT 
 	@Path("/createEjercicio")

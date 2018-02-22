@@ -1,11 +1,13 @@
 package rest.impl;
 
-import infrastructures.Factories;
 import java.util.List;
-import rest.EjercicioServiceRest;
+
 import business.EjercicioService;
 import business.exception.BusinessException;
 import business.model.Ejercicio;
+import business.model.StringJax;
+import infrastructures.Factories;
+import rest.EjercicioServiceRest;
 
 public class EjercicioServiceRestImpl implements EjercicioServiceRest {
 	EjercicioService service = Factories.services.getEjercicioService();
@@ -41,5 +43,19 @@ public class EjercicioServiceRestImpl implements EjercicioServiceRest {
 	@Override
 	public List<Ejercicio> findByMusculo(String musculo) throws BusinessException {
 		return service.findByMusculo(musculo);
+	}
+
+
+	@Override
+	public List<StringJax> findMusculos() throws BusinessException {
+		return service.findMusculos();
+
+	}
+
+
+	@Override
+	public Ejercicio findByName(String nombre) throws BusinessException {
+		return service.findByName(nombre);
+
 	}
 }

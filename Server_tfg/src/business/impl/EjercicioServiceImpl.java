@@ -9,6 +9,7 @@ import business.impl.command.CommandExecutor;
 import business.impl.ejercicio.CreateEjercicioCommand;
 import business.impl.ejercicio.UpdateEjercicioCommand;
 import business.model.Ejercicio;
+import business.model.StringJax;
 import infrastructures.Factories;
 
 
@@ -57,6 +58,24 @@ public class EjercicioServiceImpl implements EjercicioService {
 		return new CommandExecutor<List<Ejercicio>>().execute( new Command<List<Ejercicio>>() {
 			@Override public List<Ejercicio> execute() throws BusinessException {				
 				return Factories.persistence.getEjercicioDao().findByMusculo(musculo);
+			}
+		});
+	}
+
+	@Override
+	public List<StringJax> findMusculos() throws BusinessException {
+		return new CommandExecutor<List<StringJax>>().execute( new Command<List<StringJax>>() {
+			@Override public List<StringJax> execute() throws BusinessException {				
+				return Factories.persistence.getEjercicioDao().findMusculos();
+			}
+		});
+	}
+
+	@Override
+	public Ejercicio findByName(String name) throws BusinessException {
+		return new CommandExecutor<Ejercicio>().execute( new Command<Ejercicio>() {
+			@Override public Ejercicio execute() throws BusinessException {				
+				return Factories.persistence.getEjercicioDao().findByName(name);
 			}
 		});
 	}

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import business.model.Rutina;
+import business.model.SomatotiposAsignados;
 import persistence.RutinaDao;
 import persistence.util.JdbcTemplate;
 import persistence.util.RowMapper;
@@ -12,11 +13,17 @@ import persistence.util.RowMapper;
 public class RutinaDaoJdbcImpl implements RutinaDao {
 	
 	public class RutinaDtoMapper implements RowMapper<Rutina> {
-
 		@Override
 		public Rutina toObject(ResultSet rs) throws SQLException {
-			return new Rutina(rs.getString("nombrerutina"), rs.getString("descripcion"),  
-					rs.getString("somatotipo"),  rs.getString("objetivo"));
+			return new Rutina(rs.getString("nombrerutina"), rs.getString("descripcion"));
+		}
+	}
+	
+	public class RutinaSomatotipoAsignadoDtoMapper implements RowMapper<SomatotiposAsignados> {
+		@Override
+		public SomatotiposAsignados toObject(ResultSet rs) throws SQLException {
+			return new SomatotiposAsignados(rs.getString("rutinaasignada"), rs.getString("tipocuerpo"),  
+					rs.getString("objetivo"));
 		}
 	}
 
@@ -26,9 +33,7 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 	public Long save(Rutina dto) {
 		jdbcTemplate.execute("RUTINA_INSERT", 
 				dto.getNombre(),
-				dto.getDescripcion(),
-				dto.getSomatotipo(),
-				dto.getObjetivo()
+				dto.getDescripcion()
 			);
 		return null;
 	}
@@ -37,8 +42,6 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 	public int update(Rutina dto) {
 		return jdbcTemplate.execute("RUTINA_UPDATE", 
 				dto.getDescripcion(),
-				dto.getSomatotipo(),
-				dto.getObjetivo(),
 				dto.getNombre()
 		);
 	}
@@ -90,6 +93,16 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 				objetivo
 			);
 	}
+	
+	@Override
+	public SomatotiposAsignados findAsignRutina(String somatotipo, String objetivo) {
+		return jdbcTemplate.queryForObject(
+				"SOMATOTIPO_FIND_BY_CARACS", 
+				new RutinaSomatotipoAsignadoDtoMapper(),
+				somatotipo,
+				objetivo
+			);
+	}
 
 	@Override
 	public List<Rutina> findBySoma(String somatotipo) {
@@ -98,6 +111,15 @@ public class RutinaDaoJdbcImpl implements RutinaDao {
 				new RutinaDtoMapper(),
 				somatotipo
 			);
+	}
+	
+	@Override
+	public void updateSomatotipoAsignado(String somatotipo, String objetivo, String rutina) {
+		jdbcTemplate.execute("SOMATOTIPO_RUTINA_UPDATE", 
+				rutina,
+				somatotipo,
+				objetivo
+		);
 	}
 
 

@@ -19,6 +19,8 @@ public class UpdateRutinaAsignadaForAllCommand  implements Command<Void> {
 	@Override
 	public Void execute() throws BusinessException {
 		Factories.persistence.getUserDao().updateUserRutinaForAll(somatotipo, objetivo, rutina);
+		Factories.persistence.getRutinaoDao().updateSomatotipoAsignado(somatotipo, objetivo, rutina);
+
 		return null;
 	}
 

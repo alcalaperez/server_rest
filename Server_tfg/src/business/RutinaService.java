@@ -15,5 +15,7 @@ public interface RutinaService {
 	public List<Rutina> findBySomaObjet(String somatotipo, String objetivo) throws BusinessException;
 	public List<Rutina> findBySoma(String somatotipo) throws BusinessException;
 	public List<Rutina> findAllOnlyNames() throws BusinessException;
+	public Rutina findAssignedRutina(String somatotipo, String objetivo) throws BusinessException;
+	public String findAssignedRutinaLight(String somatotipo, String objetivo) throws BusinessException;
 
 }

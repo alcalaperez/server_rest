@@ -16,19 +16,15 @@ public class Rutina implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String descripcion;
-	private String somatotipo;
-	private String objetivo;
 	private List<DiaEntreno> diasEntrenamiento;
 
 	public Rutina() {
 
 	}
 	
-	public Rutina(String nombre, String descripcion, String somatotipo, String objetivo) {
+	public Rutina(String nombre, String descripcion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.setObjetivo(objetivo);
-		this.setSomatotipo(somatotipo);
 		diasEntrenamiento = new ArrayList<>();
 	}
 	
@@ -61,23 +57,6 @@ public class Rutina implements Serializable{
 		diasEntrenamiento.add(dia);
 	}
 	
-	@XmlElement
-	public String getObjetivo() {
-		return objetivo;
-	}
-
-	public void setObjetivo(String objetivo) {
-		this.objetivo = objetivo;
-	}
-
-	@XmlElement
-	public String getSomatotipo() {
-		return somatotipo;
-	}
-
-	public void setSomatotipo(String somatotipo) {
-		this.somatotipo = somatotipo;
-	}
 
 	@Override
 	public int hashCode() {
@@ -86,8 +65,6 @@ public class Rutina implements Serializable{
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((diasEntrenamiento == null) ? 0 : diasEntrenamiento.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((objetivo == null) ? 0 : objetivo.hashCode());
-		result = prime * result + ((somatotipo == null) ? 0 : somatotipo.hashCode());
 		return result;
 	}
 
@@ -114,16 +91,6 @@ public class Rutina implements Serializable{
 			if (other.nombre != null)
 				return false;
 		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (objetivo == null) {
-			if (other.objetivo != null)
-				return false;
-		} else if (!objetivo.equals(other.objetivo))
-			return false;
-		if (somatotipo == null) {
-			if (other.somatotipo != null)
-				return false;
-		} else if (!somatotipo.equals(other.somatotipo))
 			return false;
 		return true;
 	}

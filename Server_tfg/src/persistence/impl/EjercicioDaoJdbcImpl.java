@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import business.model.Ejercicio;
+import business.model.StringJax;
 import persistence.EjercicioDao;
 import persistence.util.JdbcTemplate;
 import persistence.util.RowMapper;
@@ -12,10 +13,16 @@ import persistence.util.RowMapper;
 public class EjercicioDaoJdbcImpl implements EjercicioDao {
 	
 	public class EjercicioDtoMapper implements RowMapper<Ejercicio> {
-
 		@Override
 		public Ejercicio toObject(ResultSet rs) throws SQLException {
 			return new Ejercicio(rs.getString("nombre"), rs.getString("descripcion"), rs.getString("consejo"), rs.getString("foto1"), rs.getString("foto2"), rs.getString("musculo"));
+		}
+	}
+	
+	public class MusculoDtoMapper implements RowMapper<StringJax> {
+		@Override
+		public StringJax toObject(ResultSet rs) throws SQLException {
+			return new StringJax(rs.getString("musculo"));
 		}
 	}
 
@@ -80,6 +87,23 @@ public class EjercicioDaoJdbcImpl implements EjercicioDao {
 				"EJERCICIO_FIND_BY_MUSCULO", 
 				new EjercicioDtoMapper(),
 				musculo
+			);
+	}
+
+	@Override
+	public List<StringJax> findMusculos() {
+		return jdbcTemplate.queryForList(
+				"EJERCICIO_FIND_MUSCULOS", 
+				new MusculoDtoMapper()
+			);
+	}
+
+	@Override
+	public Ejercicio findByName(String name) {
+		return jdbcTemplate.queryForObject(
+				"EJERCICIO_FIND_BY_NAME", 
+				new EjercicioDtoMapper(), 
+				name
 			);
 	}
 

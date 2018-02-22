@@ -70,4 +70,26 @@ public class RutinaServiceImpl implements RutinaService {
 		});
 
 	}
+
+	@Override
+	public Rutina findAssignedRutina(String somatotipo, String objetivo) throws BusinessException {
+		return new CommandExecutor<Rutina>().execute(new Command<Rutina>() {
+			@Override
+			public Rutina execute() throws BusinessException {
+				return new FindById(Factories.persistence.getRutinaoDao().findAsignRutina(somatotipo, objetivo).getRutinaAsignada()).execute();
+				 
+			}
+		});
+	}
+
+	@Override
+	public String findAssignedRutinaLight(String somatotipo, String objetivo) throws BusinessException {
+		return new CommandExecutor<String>().execute(new Command<String>() {
+			@Override
+			public String execute() throws BusinessException {
+				return Factories.persistence.getRutinaoDao().findAsignRutina(somatotipo, objetivo).getRutinaAsignada();
+				 
+			}
+		});
+	}
 }

@@ -58,4 +58,17 @@ public class RutinaServiceRestImpl implements RutinaServiceRest {
 		return service.findAllOnlyNames();
 
 	}
+
+
+	@Override
+	public Rutina findAssignedBySomatotipoObjetivo(String somatotipo, String objetivo) throws BusinessException {
+		return service.findAssignedRutina(somatotipo, objetivo);
+	}
+
+
+	@Override
+	public String findAssignedBySomatotipoObjetivoLight(String somatotipo, String objetivo) throws BusinessException {
+		return service.findAssignedRutinaLight(somatotipo, objetivo);
+
+	}
 }

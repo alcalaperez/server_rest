@@ -42,9 +42,20 @@ public interface RutinaServiceRest {
 			throws BusinessException;
 	
 	@GET
+	@Path("/findAssignedRutina/{somatotipo}/{objetivo}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Rutina findAssignedBySomatotipoObjetivo(@PathParam("somatotipo") String somatotipo, @PathParam("objetivo") String objetivo)
+			throws BusinessException;
+	
+	@GET
+	@Path("/findAssignedRutinaLight/{somatotipo}/{objetivo}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public String findAssignedBySomatotipoObjetivoLight(@PathParam("somatotipo") String somatotipo, @PathParam("objetivo") String objetivo)
+			throws BusinessException;
+	
+	@GET
 	@Path("/findByCaracs/{somatotipo}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@JWTTokenNeeded
 	public List<Rutina> findRutinaBySomatotipo(@PathParam("somatotipo") String somatotipo)
 			throws BusinessException;
 
@@ -60,7 +71,8 @@ public interface RutinaServiceRest {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@JWTTokenNeeded
 	public void updateRutina(Rutina rutina) throws BusinessException;
-
+	
+	
 	@DELETE
 	@Path("/{id}")
 	@JWTTokenNeeded
