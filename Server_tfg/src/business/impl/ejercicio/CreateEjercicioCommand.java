@@ -15,14 +15,14 @@ public class CreateEjercicioCommand implements Command<Long> {
 	}
 
 	@Override
-	public Long execute() throws BusinessException {
-		EjercicioCheck.nameIsNotNull(ejercicio);
-		EjercicioCheck.nameIsNotEmpty(ejercicio);
-		EjercicioCheck.consejoIsNotNullOrEmpty(ejercicio);
-		EjercicioCheck.descriptionIsNotNullOrEmpty(ejercicio);
-		EjercicioCheck.fotosIsNotNullOrEmpty(ejercicio);
-		
-		return Factories.persistence.getEjercicioDao().save(ejercicio);
+	public Long execute() throws BusinessException {		
+		Ejercicio ejercicioRepetido = Factories.persistence.getEjercicioDao().findByName(ejercicio.getNombre());
+		if(ejercicioRepetido == null) {
+			Factories.persistence.getEjercicioDao().save(ejercicio);
+			return (long) 1;
+		} else {
+			return (long) 0;
+		}
 	}
 	
 }

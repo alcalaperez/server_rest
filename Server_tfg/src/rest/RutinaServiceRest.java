@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import business.exception.BusinessException;
 import business.model.Rutina;
@@ -63,8 +64,9 @@ public interface RutinaServiceRest {
 	@PUT 
 	@Path("/createRutina")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@JWTTokenNeeded
-	public void createRutina(Rutina rutina) throws BusinessException;
+	public Response createRutina(Rutina rutina) throws BusinessException;
 
 	@POST
 	@Path("/updateRutina")

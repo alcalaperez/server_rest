@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import business.exception.BusinessException;
 import business.model.Ejercicio;
@@ -52,8 +53,9 @@ public interface EjercicioServiceRest {
 	@PUT 
 	@Path("/createEjercicio")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@JWTTokenNeeded
-	public void createEjercicio(Ejercicio ejercicio) throws BusinessException;
+	public Response createEjercicio(Ejercicio ejercicio) throws BusinessException;
 
 	@POST
 	@Path("/updateEjercicio")

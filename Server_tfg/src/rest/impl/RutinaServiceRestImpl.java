@@ -2,6 +2,9 @@ package rest.impl;
 
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import business.RutinaService;
 import business.exception.BusinessException;
 import business.model.Rutina;
@@ -19,8 +22,15 @@ public class RutinaServiceRestImpl implements RutinaServiceRest {
 
 
 	@Override
-	public void createRutina(Rutina rutina) throws BusinessException {
-		service.createRutina(rutina);
+	public Response createRutina(Rutina rutina) throws BusinessException {
+		Response response;
+		Long result = service.createRutina(rutina);
+		if(result == 1) {
+			response = Response.status(Status.CREATED).build();
+		} else {
+			response = Response.status(Status.CONFLICT).build();
+		}
+		return response;
 		
 	}
 

@@ -15,6 +15,7 @@ public class Serie implements Serializable{
 	private int id;
 	private int diaId;
 	private String ejercicioId;
+	private Ejercicio ejercicio;
 	private int series;
 	private int repeticiones;
 	private int descanos;
@@ -75,19 +76,29 @@ public class Serie implements Serializable{
 		this.descanos = descanos;
 	}
 	
+	@XmlElement
+	public Ejercicio getEjercicio() {
+		return ejercicio;
+	}
+
+	public void setEjercicio(Ejercicio ejercicio) {
+		this.ejercicio = ejercicio;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + descanos;
 		result = prime * result + diaId;
-		result = prime * result
-				+ ((ejercicioId == null) ? 0 : ejercicioId.hashCode());
+		result = prime * result + ((ejercicio == null) ? 0 : ejercicio.hashCode());
+		result = prime * result + ((ejercicioId == null) ? 0 : ejercicioId.hashCode());
 		result = prime * result + id;
 		result = prime * result + repeticiones;
 		result = prime * result + series;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,6 +111,11 @@ public class Serie implements Serializable{
 		if (descanos != other.descanos)
 			return false;
 		if (diaId != other.diaId)
+			return false;
+		if (ejercicio == null) {
+			if (other.ejercicio != null)
+				return false;
+		} else if (!ejercicio.equals(other.ejercicio))
 			return false;
 		if (ejercicioId == null) {
 			if (other.ejercicioId != null)
@@ -114,6 +130,8 @@ public class Serie implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 

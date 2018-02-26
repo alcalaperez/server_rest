@@ -5,6 +5,7 @@ import java.util.List;
 import business.exception.BusinessException;
 import business.impl.command.Command;
 import business.model.DiaEntreno;
+import business.model.Ejercicio;
 import business.model.Rutina;
 import business.model.Serie;
 import infrastructures.Factories;
@@ -27,6 +28,8 @@ public class FindById implements Command<Rutina> {
 			List<Serie> series = Factories.persistence.getSerieDao().findByDiaId(d.getId());
 
 			for (Serie s : series) {
+				Ejercicio ejercicio = Factories.persistence.getEjercicioDao().findByName(s.getEjercicioId());
+				s.setEjercicio(ejercicio);
 				d.addSerie(s);
 			}
 

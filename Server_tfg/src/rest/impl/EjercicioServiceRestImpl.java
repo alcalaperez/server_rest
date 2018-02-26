@@ -2,6 +2,9 @@ package rest.impl;
 
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import business.EjercicioService;
 import business.exception.BusinessException;
 import business.model.Ejercicio;
@@ -20,8 +23,15 @@ public class EjercicioServiceRestImpl implements EjercicioServiceRest {
 
 
 	@Override
-	public void createEjercicio(Ejercicio ejercicio) throws BusinessException {
-		service.createEjercicio(ejercicio);
+	public Response createEjercicio(Ejercicio ejercicio) throws BusinessException {
+		Response response;
+		Long result = service.createEjercicio(ejercicio);
+		if(result == 1) {
+			response = Response.status(Status.CREATED).build();
+		} else {
+			response = Response.status(Status.CONFLICT).build();
+		}
+		return response;
 		
 	}
 

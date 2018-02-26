@@ -16,18 +16,26 @@ public class CreateRutinaCommand implements Command<Long> {
 	}
 
 	@Override
-	public Long execute() throws BusinessException {		
-		Factories.persistence.getRutinaoDao().save(rutina);
-		
-		for(DiaEntreno de: rutina.getDiasEntrenamiento()) {
-			int diaid = Factories.persistence.getDiaRutinaoDao().save(de, rutina.getNombre());
-			
-			for(Serie s: de.getSeries()) {
-				Factories.persistence.getSerieDao().save(s, diaid);
+	public Long execute() throws BusinessException {	
+		Rutina rutinaExistente = Factories.persistence.getRutinaoDao().findById(rutina.getNombre());
+
+		if (rutinaExistente == null) {
+			Factories.persistence.getRutinaoDao().save(rutina);
+
+			for (DiaEntreno de : rutina.getDiasEntrenamiento()) {
+				int diaid = Factories.persistence.getDiaRutinaoDao().save(de, rutina.getNombre());
+
+				for (Serie s : de.getSeries()) {
+					Factories.persistence.getSerieDao().save(s, diaid);
+				}
 			}
+			return (long) 1;
+
+		} else {
+			return (long) 0;
+
 		}
-		
-		return null;
+
 	}
-	
+
 }
